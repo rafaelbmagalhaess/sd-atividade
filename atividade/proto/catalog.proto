@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+service ServicoCatalogo {
+    rpc buscarProduto (RequisicaoProduto) returns (RespostaProduto);
+    rpc listarProdutosBaratos (RequisicaoPreco) returns (RespostaProdutos);
+    rpc atualizarEstoque (RequisicaoAtualizarEstoque) returns (RespostaAtualizarEstoque);
+}
+
+message Produto {
+    string nome = 1;
+    float preco = 2;
+    int32 estoque = 3;
+}
+
+message RequisicaoProduto {
+    string nome = 1;
+}
+
+message RespostaProduto {
+    Produto produto = 1;
+}
+
+message RequisicaoPreco {
+    float preco_maximo = 1;
+}
+
+message RespostaProdutos {
+    repeated Produto produtos = 1;
+}
+
+message RequisicaoAtualizarEstoque {
+    string nome = 1;
+    int32 novo_estoque = 2;
+}
+
+message RespostaAtualizarEstoque {
+    string mensagem = 1;
+}
