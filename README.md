@@ -2,42 +2,46 @@
 
 ## Introdução
 
-Este sistema distribuído foi desenvolvido para atender aos requisitos de um serviço de consulta a um catálogo de produtos distribuído. O sistema utiliza Sockets e RPC/gRPC para estabelecer a comunicação entre cliente e servidor.
+Este sistema distribuído foi desenvolvido para fornecer um serviço de consulta a um catálogo de produtos utilizando Sockets e RPC/gRPC para a comunicação entre cliente e servidor. Ele permite buscar produtos, listar produtos abaixo de um preço específico e atualizar o estoque dos produtos.
 
 ## Execução do Sistema
 
 Para executar o sistema, siga os passos abaixo:
 
-1. Certifique-se de que o servidor esteja executando e configurado corretamente.
-2. Execute menu.py (ele ira fazer a conexão do servidor).
+1. Certifique-se de que o servidor esteja executando corretamente.
+2. Execute `menu.py` para usar o gRPC ou `menuSocket.py` para usar Sockets.
 3. Realize as operações desejadas (consultar produtos, atualizar estoque, etc.).
 4. O servidor processará as solicitações e retornará as respostas ao cliente.
 
 ## Comparação entre Sockets e gRPC
 
-Aqui está uma comparação entre as duas abordagens utilizadas no sistema:
+### Sockets
+**Vantagens:**
+- Simplicidade na implementação e configuração.
+- Comunicação direta entre cliente e servidor.
 
-### Sockets:
-- **Vantagens:**
-  - Fácil de implementar e configurar.
-  - Permite uma comunicação direta entre cliente e servidor.
-- **Desvantagens:**
-  - Requer uma gestão manual de conexões e comunicação.
-  - Pode ser mais lento e menos escalável do que o gRPC.
+**Desvantagens:**
+- Gestão manual de conexões e comunicação.
+- Pode ser mais lento e menos escalável comparado ao gRPC.
 
-### gRPC:
-- **Vantagens:**
-  - Permite uma comunicação mais rápida e escalável.
-  - Fornece uma gestão automática de conexões e comunicação.
-- **Desvantagens:**
-  - Requer uma configuração mais complexa e a definição de um arquivo `.proto`.
-  - Pode ser mais difícil de implementar e depurar.
+### gRPC
+**Vantagens:**
+- Comunicação mais rápida e escalável.
+- Gestão automática de conexões e comunicação.
+
+**Desvantagens:**
+- Configuração mais complexa, requer definição de arquivos `.proto`.
+- Implementação e depuração mais difíceis.
 
 ## Diagrama de Fluxo de Comunicação
 
-Aqui está um diagrama simples que ilustra o fluxo de comunicação entre cliente e servidor:
+Aqui está um diagrama que ilustra o fluxo de comunicação entre cliente e servidor:
 
-## Código-Fonte do Sistema
-
-O código-fonte do sistema está disponível nos arquivos do repositório.
-
+```mermaid
+graph TD;
+    A[Cliente] -->|Solicitação de Produto| B[Servidor];
+    B -->|Resposta com Detalhes do Produto| A;
+    A -->|Solicitação de Produtos Baratos| B;
+    B -->|Resposta com Lista de Produtos| A;
+    A -->|Solicitação de Atualização de Estoque| B;
+    B -->|Resposta de Confirmação| A;
